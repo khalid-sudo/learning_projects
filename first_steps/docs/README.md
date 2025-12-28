@@ -87,7 +87,7 @@ In order to catch an exception in python we use the try except statement.
     except FileNotFoundError:
         print("the file wasn't found")
 ```
-and if want to give it more context we'll use the f sring statement
+and if want to give it more context we'll use the f sring statement.This concept is caalled **Exception Enrichement**
 
 ``` file = "text.txt"
     try:
@@ -97,6 +97,36 @@ and if want to give it more context we'll use the f sring statement
     except FileNotFoundError:
         print(f"the file {file} wasn't found")
 ```
+So in order To complete the program, I was thinking what was the actions needed to be able to complete the program that will help me compare the execution of two files. And this was the ideas i got:
++ I 'll need to read a file
++ Add a step of validation befor proceeding (if it's actually a python file or not)
++ I need to execute the content as a Python Code 
++ I need to truck the amount of time consumed by each content ("file") execution
+I should add to that a better error handling.
 
+But as you can see theris a certain order in these action 
+befor reading the content I need to check the file if it is indeed a Python file,if it's not  we'll need to stop the program  instantly.
+If yes we'll try to get it's content. anf finaly run and truck the execution.
 
+this is the core logic i got for a v0. And befor proceeding to writing any code, i must define the functions with a specific names so that i can be sure that the logic is clear to me or something is still missing
+```
+def _is_python_file(file_name: str) -> bool:
+    ...
 
+def _validate_file_path(file_path: str):
+   ...
+
+def get_script_from_file(file_path: str) -> str:
+    ...
+def run_file(file_content: str):
+    ...
+```
+As you can see the imporance of identifying the type of parameters which join the logic of a pythonic code and what the  [PEP 8](https://peps.python.org/pep-0008/#naming-conventions) provide as instructions.
+ 
+Once we get the squeleton of our project. the remaining part is to fill the body of each function, which is relative to the knowled you have
+>TIP:
+Try to use the very basic knowledge you have right now to implement the logic of each function.
+
+Once you finich the program compare your solution to mine in term of time of execution and see how much faster your code can get throught implementing the pythn  concept you learned so far.
+
+Heris the link of the V0 Version of the code i used [V0](https://github.com/khalid-sudo/learning_projects/blob/main/first_steps/read_files/compare_perf_V0.py).
