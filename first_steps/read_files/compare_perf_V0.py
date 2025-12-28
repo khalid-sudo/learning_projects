@@ -1,4 +1,5 @@
 import time
+
 def timer(func):
     def wrapper(*args, **kwargs):
         start_time = time.time()
@@ -7,6 +8,7 @@ def timer(func):
         print(f"The function {func.__name__!r} took: {end_time - start_time:.4f} sec")
         return result
     return wrapper
+    
 def _is_python_file(file_name: str) -> bool:
     if file_name.endswith('.py'):
         return True
@@ -27,6 +29,7 @@ def get_script_from_file(file_path: str) -> str:
         return _validate_file_path(file_path)
     except OSError as e:
         raise FileNotFoundError(f"the File with the name {file_path} wasn't found . {e}")
+        
 @timer
 def run_file(file_content: str):
     name = {}
