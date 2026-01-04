@@ -49,8 +49,8 @@ if __name__ == "__main__":
     #current_system = sys._current_frames()
     #for key, value in current_system.items():
     #    print(f"the key is {key} and the value globals  is {value.f_globals.items()} \n \t and \n*********************\nlocals  {value.f_locals.items()}")
-    thread1 = threading.Thread(target=main,args=(Path("./data/Tests/test1/te.st2.py"),))
-    thread2 = threading.Thread(target=main,args=(Path("./data/Tests/test1/test1.py"),))
+    thread1 = threading.Thread(target=main,args=(Path("./data/test2.py"),))
+    thread2 = threading.Thread(target=main,args=(Path("./data/test1.py"),))
     thread1.start()
     thread2.start()
     thread1.join()
