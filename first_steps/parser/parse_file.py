@@ -1,9 +1,7 @@
 from pathlib import Path
 import ast
 import logging
-from types import GeneratorType, NoneType
-import types
-from typing import Generator
+from sys import version_info
 logging.basicConfig(level=logging.INFO)
 
 def read_file(file_name: Path) -> str:
@@ -25,12 +23,10 @@ def read_parsed(value):
         else:
             return f"value => {value}"  
 
-
-
 def parse_file(file_name: str):
     try:
         source_code = read_file(Path(file_name))
-        tree = ast.parse(source_code,filename=file_name,mode="exec",type_comments=True,feature_version=(3, 13))
+        tree = ast.parse(source_code,filename=file_name,mode="exec",type_comments=True,feature_version=(version_info.major, version_info.minor))
         #print(ast.dump(tree))
         tree = ast.parse(source_code)
         #assignment_node = tree.body
@@ -45,6 +41,5 @@ def parse_file(file_name: str):
 def main():
     file_path:str = "../data/test2.py"
     parse_file(file_path)
-
 main()
 
