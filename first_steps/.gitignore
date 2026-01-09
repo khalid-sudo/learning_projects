@@ -3,3 +3,4 @@
 *.pyc
 __pycache__/
 first_steps.egg-info/
+lib/
