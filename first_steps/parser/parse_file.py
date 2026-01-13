@@ -2,11 +2,13 @@ from pathlib import Path
 import ast
 import logging
 from sys import version_info
-from .visualize_parser import  visualizer
+from .visualize_parser import  Visualizer
+from .draw_io_visualizer import DrawIoVisualizer
 from pyvis.network import Network
 
 logging.basicConfig(level=logging.INFO)
-_net = visualizer.net
+#initialize factory
+
 
 def read_file(file_name: Path) -> str:
     return file_name.read_text()
@@ -51,12 +53,14 @@ def read_parsed(value):
 
 def _parse_file(file_name: Path,file_content: str):
     try:
+        visualizer = Visualizer(conf=Network(height='600px', width='100%',directed=False, notebook=True, neighborhood_highlight=False, select_menu=False, filter_menu=False, bgcolor='#ffffff', font_color=False, layout=None, heading='', cdn_resources='local'),file_name=file_name,file_content=file_content)
+        #visualizer_V2 = DrawIoVisualizer(file_content=file_content, file_name=file_name)
+        _net = visualizer.net
         if file_content:
             tree = ast.parse(file_content,filename=file_name,mode="exec",type_comments=True,feature_version=(version_info.major, version_info.minor))
-            #print(ast.dump(tree))
+            print(ast.dump(tree))
             for node_index in range(len(tree.body)):
                 node_id = str(tree.body[node_index])
-                print(f"the node is is {node_id}")
                 label = type(tree.body[node_index]).__name__+f"{node_index}"
                 _net.add_node(node_id, label=label, hidden=True, group="root_children", shape="box")
                 _net.add_edge("Root", node_id, arrows="to",arrowStrikethrough=False)
@@ -79,13 +83,15 @@ def _parse_file(file_name: Path,file_content: str):
     finally:
         #generate_graph
         visualizer.generate_graph(_net)
+        # if 'tree' in locals():
+        #     visualizer_V2.save_diagram(tree)
 
 
 
 def main():
-    file_path:Path = Path("./parser/visualize_parser.py")
+    file_path:Path = Path("./data/test1.py")
     file_content = read_file(file_path)
-    _parse_file(file_content,file_content)
+    _parse_file(file_path,file_content)
     
 if __name__ == "__main__":
     main()
