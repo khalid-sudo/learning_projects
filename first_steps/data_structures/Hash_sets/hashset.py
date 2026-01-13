@@ -22,9 +22,9 @@ def compare_set_to_list():
 #compare_set_to_list()
 
 """
-Problems solved with using list and set. Pinpoint the elements that appear in both of the given lists.
+Problems solved with using list and set..
 """
-#Problem 1: Array Intersection
+#Problem 1: Array Intersection =>  Pinpoint the elements that appear in both of the given lists
 #Naive approache
 list1 = [3,5,10,54,3,45,33,21,33,24]
 list2 = [4,8,3,76,987,65,3,5]
@@ -52,3 +52,30 @@ intersection = set1 & set2
 
 print(intersection)
 print(f"it took {time.time() - start_time}'s") #output: it took 4.0531158447265625e-06's
+
+#Problem 2: Non-Repeating Elements => determine all elements in a given list that appear only once, meaning they don't have any duplicates in the same list
+#Naive approache
+
+list1 = [3,5,10,54,3,45,32,5,21,33,33]
+start_time = time.time()
+unique = []
+duplicate = []
+for num in range(len(list1)):
+    for j in range(num+1,len(list1)):
+        if list1[num] == list1[j]:
+            duplicate.append(list1[num])
+        elif j == len(list1) - 1 and list1[num]  not in duplicate:
+                unique.append(list1[num])
+                
+print(sorted(unique))
+print(f"it took {time.time() - start_time}'s") #output it took 1.621246337890625e-05's
+#now using set
+start_time = time.time()
+seen, repeated = set(), set()
+for num in list1:
+    if num in seen:
+        repeated.add(num)
+    else:
+        seen.add(num)
+print(sorted(list(seen-repeated)))
+print(f"it took {time.time() - start_time}'s") #it took 5.0067901611328125e-06's
