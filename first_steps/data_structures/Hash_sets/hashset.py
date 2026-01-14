@@ -44,7 +44,9 @@ print(intersection_list)
 
 list1 = [3,5,10,54,3,45,33,21,33,24]
 list2 = [4,8,3,76,987,65,3,5]
+
 #now using set
+
 start_time = time.time()
 set1 = set(list1) 
 set2 = set(list2)
@@ -69,7 +71,9 @@ for num in range(len(list1)):
                 
 print(sorted(unique))
 print(f"it took {time.time() - start_time}'s") #output it took 1.621246337890625e-05's
+
 #now using set
+
 start_time = time.time()
 seen, repeated = set(), set()
 for num in list1:
@@ -79,3 +83,35 @@ for num in list1:
         seen.add(num)
 print(sorted(list(seen-repeated)))
 print(f"it took {time.time() - start_time}'s") #it took 5.0067901611328125e-06's
+
+#Problem 3: Unique Elements consist on finding elements that exist only in list1 and elements that exist only in list2, respectively.
+
+list1 = [3,5,10,54,3,45,33,21,33,24]
+list2 = [4,8,3,76,987,65,3,5]
+duplicate = []
+unique = []
+#Naive approache
+for num in range(len(list1)):
+    if list1[num] not in list2:
+        for j in range(num + 1,len(list1)):
+            if list1[j] == list1[num]:
+                duplicate.append(list1[num])
+            elif j == len(list1) - 1 and list1[num] not in duplicate:
+                unique.append(list1[num])
+for num in range(len(list2)):
+    if list2[num] not in list1:
+        for j in range(num + 1,len(list2)):
+            if list2[j] == list2[num]:
+                duplicate.append(list2[num])
+            elif j == len(list2) - 1 and list2[num] not in duplicate:
+                unique.append(list2[num])
+print(unique)
+
+#using the set 
+
+set1 = set(list1)
+set2 = set(list2)
+unique_to_1 = set1 - set2
+
+unique_to_2 = set2 - set1
+print(f"{sorted(list(unique_to_1)), sorted(list(unique_to_2))}")
