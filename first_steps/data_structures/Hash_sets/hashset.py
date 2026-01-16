@@ -115,3 +115,26 @@ unique_to_1 = set1 - set2
 
 unique_to_2 = set2 - set1
 print(f"{sorted(list(unique_to_1)), sorted(list(unique_to_2))}")
+
+#Problem 1: Unique String in the List consist on  identifying the first unique string from a list. 
+#naive_approach
+string_sentence = "i really hope that we will learn together,  sharing is caring that's our emblem, our motto. Hope this example is just right to show case the difrence"
+
+biglist = string_sentence.split(". ")
+sublist = [subl for sub in biglist for subl in sub.split(", ")]
+words = [s.lower() for sen in sublist for s in sen.split(" ")]
+
+duplicated = []
+
+for index in range(len(words)):
+    if words[index] in duplicated:
+        continue
+    else:
+        for index_j in range(index + 1,len(words)):
+            if words[index] == words[index_j]:
+                duplicated.append(words[index])
+            
+for word in words:
+    if word not in duplicated:
+        print(word)
+    break
