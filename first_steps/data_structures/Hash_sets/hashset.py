@@ -22,7 +22,7 @@ def compare_set_to_list():
 #compare_set_to_list()
 
 """
-Problems solved with using list and set..
+Problems solved with using list and set.. 
 """
 #Problem 1: Array Intersection =>  Pinpoint the elements that appear in both of the given lists
 #Naive approache
@@ -116,7 +116,7 @@ unique_to_1 = set1 - set2
 unique_to_2 = set2 - set1
 print(f"{sorted(list(unique_to_1)), sorted(list(unique_to_2))}")
 
-#Problem 1: Unique String in the List consist on  identifying the first unique string from a list. 
+#Problem 4: Unique String in the List consist on  identifying the first unique string from a list. 
 #naive_approach
 string_sentence = "i really hope that we will learn together,  sharing is caring that's our emblem, our motto. Hope this example is just right to show case the difrence"
 
@@ -138,3 +138,15 @@ for word in words:
     if word not in duplicated:
         print(word)
     break
+#susing_set
+seen, duplica = set(),set()
+
+for word in words:
+    if word in seen:
+        duplica.add(word)
+    seen.add(word)
+
+for w in words:
+    if w not in duplica:
+        print(f"TADAAAA=>{w}")
+        break
